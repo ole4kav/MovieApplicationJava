@@ -50,7 +50,7 @@ public class MoviesFragment extends Fragment implements MoviesFragmentInterface.
         initViews(view);
         initAdapters();
     }
-    
+
 
     private void initViews(View view) {
         rvMoviesData = view.findViewById(R.id.rvMoviesData);
