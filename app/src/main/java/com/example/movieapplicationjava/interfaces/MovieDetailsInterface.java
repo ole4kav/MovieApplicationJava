@@ -1,8 +1,8 @@
 package com.example.movieapplicationjava.interfaces;
 
-import android.os.Bundle;
-
 import com.example.movieapplicationjava.models.Movie;
+
+import java.util.List;
 
 public interface MovieDetailsInterface {
 
@@ -13,8 +13,9 @@ public interface MovieDetailsInterface {
 
     interface Presenter {
 
-        void getMovie(Bundle args);
-        void setData();
+        void setData(Movie movie);
+
+        String buildGenreList(List<String> movieGenreList);
     }
 
 }

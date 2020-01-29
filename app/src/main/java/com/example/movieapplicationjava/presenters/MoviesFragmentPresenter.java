@@ -19,10 +19,15 @@ public class MoviesFragmentPresenter implements MoviesFragmentInterface.Presente
 
     @Override
     public ArrayList<Movie> sortMovieList(ArrayList<Movie> movieArrayList) {
-        Collections.sort(movieArrayList, (movie1, movie2) -> movie1.getReleaseYear().compareTo(movie2.getReleaseYear()));
+        Collections.sort(movieArrayList, (movie1, movie2) ->
+                movie1.getReleaseYear().compareTo(movie2.getReleaseYear()));
         return movieArrayList;
     }
 
 
+    @Override
+    public void openNextFragment(Movie movie) {
+        view.openNextFragment(movie);
+    }
 
 }

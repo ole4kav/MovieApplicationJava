@@ -15,6 +15,8 @@ public interface MoviesFragmentInterface {
 
         ArrayList<Movie> sortMovieList(ArrayList<Movie> movieArrayList);
 
+        void openNextFragment(Movie movie);
+
     }
 
 }

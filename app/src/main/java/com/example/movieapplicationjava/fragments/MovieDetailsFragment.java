@@ -18,8 +18,13 @@ import com.example.movieapplicationjava.presenters.MovieDetailsPresenter;
 
 public class MovieDetailsFragment extends Fragment implements MovieDetailsInterface.View {
 
+    public static final String KEY_MOVIE = "movie";
+
+    MovieDetailsInterface.Presenter presenter;
+
     private ImageView ivMovieImage;
     private TextView tvTitle, tvYear, tvRating, tvGenre;
+    private Movie movie;
 
 
     @Override
@@ -30,14 +35,14 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsInterf
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
-        MovieDetailsInterface.Presenter presenter = new MovieDetailsPresenter(this);
+        presenter = new MovieDetailsPresenter(this);
 
         if (getArguments() != null) {
-            presenter.getMovie(getArguments());
+            movie = getArguments().getParcelable(KEY_MOVIE);
         }
 
         initViews(view);
-        presenter.setData();
+        presenter.setData(movie);
     }
 
 
@@ -54,15 +59,7 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsInterf
         tvTitle.setText(movie.getTitle());
         tvYear.setText(String.valueOf(movie.getReleaseYear()));
         tvRating.setText(String.valueOf(movie.getRating()));
-
-
-        StringBuilder genreList = new StringBuilder();
-
-        for (String genre : movie.getGenreList()) {
-            genreList.append(genre).append(", ");
-        }
-
-        tvGenre.setText(genreList.toString());
+        tvGenre.setText(presenter.buildGenreList(movie.getGenreList()));
 
         loadImage(movie);
     }

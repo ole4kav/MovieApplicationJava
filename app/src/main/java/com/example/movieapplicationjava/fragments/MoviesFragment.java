@@ -21,11 +21,12 @@ import com.example.movieapplicationjava.presenters.MoviesFragmentPresenter;
 
 import java.util.ArrayList;
 
-import static com.example.movieapplicationjava.presenters.MovieDetailsPresenter.KEY_MOVIE;
+import static com.example.movieapplicationjava.fragments.MovieDetailsFragment.KEY_MOVIE;
 
 public class MoviesFragment extends Fragment implements MoviesFragmentInterface.View {
 
     private RecyclerView rvMoviesData;
+    private MoviesFragmentInterface.Presenter presenter;
 
     public static final String KEY_MOVIES_LIST = "movieList";
     private ArrayList<Movie> movieArrayList;
@@ -39,13 +40,13 @@ public class MoviesFragment extends Fragment implements MoviesFragmentInterface.
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        MoviesFragmentInterface.Presenter presenter = new MoviesFragmentPresenter(this);
+        presenter = new MoviesFragmentPresenter(this);
 
         MoviesActivity activity = (MoviesActivity) getActivity();
 
-        movieArrayList = (ArrayList<Movie>) activity.getIntent().getSerializableExtra(KEY_MOVIES_LIST);
+        movieArrayList =
+                presenter.sortMovieList((ArrayList<Movie>) activity.getIntent().getSerializableExtra(KEY_MOVIES_LIST));
 
-        movieArrayList = presenter.sortMovieList(movieArrayList);
 
         initViews(view);
         initAdapters();
@@ -58,7 +59,7 @@ public class MoviesFragment extends Fragment implements MoviesFragmentInterface.
 
 
     private void initAdapters() {
-        MovieAdapter adapter = new MovieAdapter(movieArrayList);
+        MovieAdapter adapter = new MovieAdapter(movieArrayList, presenter);
         rvMoviesData.setAdapter(adapter);
         rvMoviesData.setLayoutManager(new LinearLayoutManager(getContext()));
         rvMoviesData.addItemDecoration(new DividerItemDecoration(rvMoviesData.getContext(), DividerItemDecoration.VERTICAL));
@@ -82,8 +83,6 @@ public class MoviesFragment extends Fragment implements MoviesFragmentInterface.
         movieDetailsFragment.setArguments(args);
         return movieDetailsFragment;
     }
-
-
 
 
 }

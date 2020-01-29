@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.movieapplicationjava.R;
+import com.example.movieapplicationjava.interfaces.MoviesFragmentInterface;
 import com.example.movieapplicationjava.models.Movie;
 
 import java.util.ArrayList;
@@ -20,9 +21,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     private ArrayList<Movie> movieArrayList;
     private Context context;
+    private MoviesFragmentInterface.Presenter presenter;
 
-    public MovieAdapter(ArrayList<Movie> movieArrayList) {
+    public MovieAdapter(ArrayList<Movie> movieArrayList, MoviesFragmentInterface.Presenter presenter) {
         this.movieArrayList = movieArrayList;
+        this.presenter = presenter;
     }
 
     @NonNull
@@ -32,7 +35,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         context = parent.getContext();
 
         View moviesView = LayoutInflater.from(context).inflate(R.layout.row_movies, parent, false);
-
 
         return new ViewHolder(moviesView);
 
@@ -57,7 +59,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         loadImage(movie.getImageUrl(), holder);
 
-        //holder.itemView.setOnClickListener(v -> view.openNextFragment(movie));
+        holder.itemView.setOnClickListener(v -> presenter.openNextFragment(movie));
 
     }
 
@@ -76,7 +78,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivMovieImage;
         private TextView tvTitle, tvYear, tvRating, tvGenre, tvRowNum;

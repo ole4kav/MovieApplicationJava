@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MovieApplicationJava</string>
+    <string name="splash_title">Movie application</string>
 </resources>

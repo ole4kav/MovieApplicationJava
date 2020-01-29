@@ -12,8 +12,8 @@
         android:id="@+id/tvSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Movie application"
-        android:textSize="40dp"
+        android:text="@string/splash_title"
+        android:textSize="@dimen/title_size_40"
         android:layout_centerInParent="true"/>
 
     <ProgressBar
@@ -32,7 +32,7 @@
         android:id="@+id/tvPercent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50dp"
+        android:textSize="@dimen/percent_size_50"
         android:layout_below="@+id/progressBar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
