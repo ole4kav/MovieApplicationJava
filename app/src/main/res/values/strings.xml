@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MovieApplicationJava</string>
     <string name="splash_title">Movie application</string>
+    <string name="movie_name_title">Movie name:</string>
+    <string name="movie_release_year_title">Release year:</string>
+    <string name="movie_genre_title">Movie genre:</string>
 </resources>
