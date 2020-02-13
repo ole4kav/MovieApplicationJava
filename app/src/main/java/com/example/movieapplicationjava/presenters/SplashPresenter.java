@@ -25,6 +25,8 @@ public class SplashPresenter implements SplashInterface.Presenter {
 
     @Override
     public void downloadJson() {
+        // TODO: 2020-02-14 server request is a logic operation so you should do it in the presenter and return the response with callback
+        //  (Recommended to do as we saw in the Architecture lecture)
         ApiServiceInterface api = RetrofitClient.getApiService(); //Creating an object of our api interface
         Call<ArrayList<Movie>> call = api.getMoviesJSON(); //Calling JSON
 

@@ -25,8 +25,23 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsInterf
 
     private ImageView ivMovieImage;
     private TextView tvTitle, tvYear, tvRating, tvGenre, tvTitleDescription, tvYearDescription, tvGenreDescription;
-    private Movie movie;
+    private Movie movie; // TODO: 2020-02-13 you don't need this if you don't use it in the fragment (could be in the presenter)
 
+
+
+    // TODO: 2020-02-13 ->  BEST PRACTICE:
+    //  Creating all of the instances of each fragment inside the fragment.
+    //  So, only within the Fragment you call 'new Fragment()'
+    //  you can use this:
+    /*
+    public static Fragment newInstance(Movie movie) {
+        MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(KEY_MOVIE, movie);
+        movieDetailsFragment.setArguments(args);
+        return movieDetailsFragment;
+    }
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

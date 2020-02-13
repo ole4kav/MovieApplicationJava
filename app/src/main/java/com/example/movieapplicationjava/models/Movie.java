@@ -57,6 +57,21 @@ public class Movie implements Parcelable {
         return genreList;
     }
 
+    // TODO: 2020-02-14 the Movie object determines how to display the list of genres. Therefore logic should be here.
+    /*
+    private String getGenreListAsString(){
+        StringBuilder genreListAsString = new StringBuilder();
+
+        if(genreList != null && !genreList.isEmpty()) {
+            for (String genre : genreList) {
+                genreListAsString.append(genre).append(", ");
+            }
+        }
+
+        return genreListAsString.toString();
+    }
+     */
+
     @Override
     public int describeContents() {
         return 0;

@@ -20,10 +20,13 @@ import java.util.ArrayList;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
     private ArrayList<Movie> movieArrayList;
-    private Context context;
+    private Context context; // // TODO: 2020-02-13 DO NOT SAVE CONTEXT AS PROPERTY (Do everything to avoid it)
     private MoviesFragmentInterface.Presenter presenter;
 
     public MovieAdapter(ArrayList<Movie> movieArrayList, MoviesFragmentInterface.Presenter presenter) {
+        // TODO: 2020-02-13 the data should be in the presenter
+        // this.movieArrayList = presenter.getSortedMovieList();
+
         this.movieArrayList = movieArrayList;
         this.presenter = presenter;
     }
@@ -34,6 +37,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         context = parent.getContext();
 
+        // TODO: 2020-02-13 to avoid using context, you could use this
+        //  View moviesView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_movies, parent, false);
         View moviesView = LayoutInflater.from(context).inflate(R.layout.row_movies, parent, false);
 
         return new ViewHolder(moviesView);
@@ -54,7 +59,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         for (String genre : movie.getGenreList()) {
             genreList.append(genre).append(", ");
         }
-
+        // TODO: 2020-02-13 this is the 'logic' of the Movie item. so this should be in the Movie object
+        //  and use it like this:
+        // holder.tvGenre.setText(movie.getGenreListAsString());
         holder.tvGenre.setText(genreList.toString());
 
         loadImage(movie.getImageUrl(), holder);
@@ -65,6 +72,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     private void loadImage(String imageUrl, @NonNull MovieAdapter.ViewHolder holder) {
 
+        // TODO: 2020-02-13 to avoid using context, you could use this
+        //  Glide.with(holder.ivMovieImage.getContext()).load(imageUrl).override(200, 200).into(holder.ivMovieImage);
         Glide.with(context)
                 .load(imageUrl)
                 .override(200, 200)
