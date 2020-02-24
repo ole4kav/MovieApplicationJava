@@ -57,9 +57,7 @@ public class Movie implements Parcelable {
         return genreList;
     }
 
-    // TODO: 2020-02-14 the Movie object determines how to display the list of genres. Therefore logic should be here.
-    /*
-    private String getGenreListAsString(){
+    public String getGenreListAsString(){
         StringBuilder genreListAsString = new StringBuilder();
 
         if(genreList != null && !genreList.isEmpty()) {
@@ -68,9 +66,12 @@ public class Movie implements Parcelable {
             }
         }
 
-        return genreListAsString.toString();
+        return removeLast2Chars(genreListAsString.toString());
     }
-     */
+
+    private static String removeLast2Chars(String str) {
+        return str.substring(0, str.length() - 2);
+    }
 
     @Override
     public int describeContents() {
