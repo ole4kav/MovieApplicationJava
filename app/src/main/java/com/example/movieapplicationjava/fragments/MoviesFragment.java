@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieapplicationjava.R;
-import com.example.movieapplicationjava.activities.MoviesActivity;
 import com.example.movieapplicationjava.adapters.MovieAdapter;
 import com.example.movieapplicationjava.interfaces.MoviesFragmentInterface;
 import com.example.movieapplicationjava.models.Movie;
@@ -23,13 +22,18 @@ import java.util.ArrayList;
 
 public class MoviesFragment extends Fragment implements MoviesFragmentInterface.View {
 
+    public static final String KEY_MOVIES_LIST = "movieList";
+
     private RecyclerView rvMoviesData;
     private MoviesFragmentInterface.Presenter presenter;
 
-    public static final String KEY_MOVIES_LIST = "movieList";
+    public static Fragment newInstance(ArrayList<Movie> movieArrayList) {
 
-    public static Fragment newInstance() {
-        return new MoviesFragment();
+        MoviesFragment moviesFragment = new MoviesFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(KEY_MOVIES_LIST, movieArrayList);
+        moviesFragment.setArguments(args);
+        return moviesFragment;
     }
 
     @Override
@@ -42,13 +46,8 @@ public class MoviesFragment extends Fragment implements MoviesFragmentInterface.
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         presenter = new MoviesFragmentPresenter(this);
 
-        // TODO: 2020-02-13 You should get the data from the Bundle of the current Fragment and not from the Bundle of the Activity.
-        //  One of the Fragments advantage is the Fragment can be reuse in different activities.
-        //  That's why you don't want to call the Activity explicitly in the fragment (in this case MoviesActivity)
-        MoviesActivity activity = (MoviesActivity) getActivity();
-
-        if (activity != null) {
-            presenter.setMovieList((ArrayList<Movie>) activity.getIntent().getSerializableExtra(KEY_MOVIES_LIST));
+        if (getArguments() != null) {
+            presenter.setMovieList((ArrayList<Movie>) getArguments().getSerializable(KEY_MOVIES_LIST));
         }
 
         initViews(view);

@@ -8,7 +8,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.movieapplicationjava.R;
 import com.example.movieapplicationjava.fragments.MoviesFragment;
 import com.example.movieapplicationjava.interfaces.MovieInterface;
+import com.example.movieapplicationjava.models.Movie;
 import com.example.movieapplicationjava.presenters.MoviePresenter;
+
+import java.util.ArrayList;
+
+import static com.example.movieapplicationjava.fragments.MoviesFragment.KEY_MOVIES_LIST;
 
 public class MoviesActivity extends FragmentActivity implements MovieInterface.View {
 
@@ -22,10 +27,12 @@ public class MoviesActivity extends FragmentActivity implements MovieInterface.V
 
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void openFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flMoviesFragment, MoviesFragment.newInstance());
+        ft.replace(R.id.flMoviesFragment,
+                MoviesFragment.newInstance((ArrayList<Movie>) getIntent().getSerializableExtra(KEY_MOVIES_LIST)));
         ft.commit();
     }
 }
