@@ -11,8 +11,21 @@ public interface SplashInterface {
     }
 
     interface Presenter {
+
         void downloadJson();
 
+    }
+
+    interface Model {
+
+        void getMovieList(OnFinishedListener onFinishedListener);
+
+        interface OnFinishedListener {
+
+            void onFinished(List<Movie> movieArrayList);
+
+            void onFailure(Throwable t);
+        }
     }
 
 }

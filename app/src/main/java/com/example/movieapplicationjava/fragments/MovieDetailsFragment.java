@@ -19,14 +19,19 @@ import com.example.movieapplicationjava.presenters.MovieDetailsPresenter;
 
 public class MovieDetailsFragment extends Fragment implements MovieDetailsInterface.View {
 
-    public static final String KEY_MOVIE = "movie";
-
-    private MovieDetailsInterface.Presenter presenter;
+    private static final String KEY_MOVIE = "movie";
 
     private ImageView ivMovieImage;
     private TextView tvTitle, tvYear, tvRating, tvGenre, tvTitleDescription, tvYearDescription, tvGenreDescription;
-    private Movie movie;
 
+
+    static Fragment newInstance(Movie movie) {
+        MovieDetailsFragment movieDetailsFragment = new MovieDetailsFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(KEY_MOVIE, movie);
+        movieDetailsFragment.setArguments(args);
+        return movieDetailsFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,14 +41,13 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsInterf
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
-        presenter = new MovieDetailsPresenter(this);
-
-        if (getArguments() != null) {
-            movie = getArguments().getParcelable(KEY_MOVIE);
-        }
+        MovieDetailsInterface.Presenter presenter = new MovieDetailsPresenter(this);
 
         initViews(view);
-        presenter.setData(movie);
+
+        if (getArguments() != null) {
+            presenter.setData(getArguments().getParcelable(KEY_MOVIE));
+        }
     }
 
 
@@ -71,7 +75,7 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsInterf
         tvYear.setText(getString(R.string.movie_release_year_title));
         tvYearDescription.setText(String.valueOf(movie.getReleaseYear()));
         tvGenre.setText(getString(R.string.movie_genre_title));
-        tvGenreDescription.setText(presenter.buildGenreList(movie.getGenreList()));
+        tvGenreDescription.setText(movie.getGenreListAsString());
 
         tvRating.setText(String.valueOf(movie.getRating()));
 

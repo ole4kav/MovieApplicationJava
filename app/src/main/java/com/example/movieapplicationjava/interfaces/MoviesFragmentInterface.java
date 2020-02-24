@@ -13,7 +13,9 @@ public interface MoviesFragmentInterface {
 
     interface Presenter {
 
-        ArrayList<Movie> sortMovieList(ArrayList<Movie> movieArrayList);
+        void setMovieList(ArrayList<Movie> movieArrayList);
+
+        ArrayList<Movie> getSortedMovieList();
 
         void openNextFragment(Movie movie);
 

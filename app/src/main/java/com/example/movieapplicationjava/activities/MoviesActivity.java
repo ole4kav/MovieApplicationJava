@@ -18,7 +18,6 @@ public class MoviesActivity extends FragmentActivity implements MovieInterface.V
         setContentView(R.layout.activity_movies);
 
         MovieInterface.Presenter presenter = new MoviePresenter(this);
-
         presenter.startActivity();
 
     }
@@ -26,7 +25,7 @@ public class MoviesActivity extends FragmentActivity implements MovieInterface.V
     @Override
     public void openFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flMoviesFragment, new MoviesFragment());
+        ft.replace(R.id.flMoviesFragment, MoviesFragment.newInstance());
         ft.commit();
     }
 }

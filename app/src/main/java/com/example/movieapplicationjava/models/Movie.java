@@ -57,6 +57,22 @@ public class Movie implements Parcelable {
         return genreList;
     }
 
+    public String getGenreListAsString(){
+        StringBuilder genreListAsString = new StringBuilder();
+
+        if(genreList != null && !genreList.isEmpty()) {
+            for (String genre : genreList) {
+                genreListAsString.append(genre).append(", ");
+            }
+        }
+
+        return removeLast2Chars(genreListAsString.toString());
+    }
+
+    private static String removeLast2Chars(String str) {
+        return str.substring(0, str.length() - 2);
+    }
+
     @Override
     public int describeContents() {
         return 0;
